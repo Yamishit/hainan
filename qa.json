@@ -1,0 +1,233 @@
+{
+  "verified": "2026-09-16",
+  "cards": [
+    {
+      "id": "node-1",
+      "file": "01-haikou.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-2",
+      "file": "02-puqian.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-3",
+      "file": "03-mulan.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-4",
+      "file": "04-tonggu.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-5",
+      "file": "05-dongjiao.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-6",
+      "file": "06-tanmen.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-7",
+      "file": "07-museum.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-8",
+      "file": "08-fenjie.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-9",
+      "file": "09-hyatt.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-10",
+      "file": "10-oceanpark.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-11",
+      "file": "11-xincun.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-12",
+      "file": "12-monkey.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-13",
+      "file": "13-fairmont.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "node-14",
+      "file": "14-linwang.png",
+      "width": 800,
+      "height": 1240,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2480
+      ]
+    },
+    {
+      "id": "timetable",
+      "file": "15-timetable.png",
+      "width": 800,
+      "height": 1420,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2840
+      ]
+    },
+    {
+      "id": "checklist",
+      "file": "17-checklist.png",
+      "width": 800,
+      "height": 1420,
+      "overflow": [],
+      "broken": 0,
+      "fontLoaded": true,
+      "pixels": [
+        1600,
+        2840
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": false,
+      "broken": 0
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "overflow": false,
+      "broken": 0
+    }
+  ],
+  "totalCards": 16,
+  "allPassed": true
+}

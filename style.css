@@ -1,0 +1,341 @@
+@font-face{font-family:Travel;src:url('fonts/ZCOOLKuaiLe-Regular.ttf') format('truetype');font-display:block}
+article.sheet{height:1240px}
+article.sheet.checklist{height:1420px}
+article.sheet.timetable{height:1420px}
+
+/* PhotoSwipe 灯箱深色毛玻璃与悬浮动效 */
+.pswp__bg {
+  background: rgba(13, 27, 34, 0.78) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.tile, .cover-triad a, .art-grid a, .character-hero a {
+  cursor: zoom-in;
+}
+.tile img, .cover-triad img, .art-grid img, .character-hero img {
+  transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.22s ease;
+}
+.tile:hover img, .cover-triad a:hover img, .art-grid a:hover img, .character-hero a:hover img {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(47, 123, 154, 0.18);
+}
+.pswp__img {
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.gallery .gallery-header h1{text-wrap:balance}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Microsoft YaHei',sans-serif;color:#33434b;letter-spacing:0;background:#edf7fa}
+a{color:inherit}
+img{display:block}
+
+.sheet{width:800px;height:1240px;background:white;position:relative;overflow:hidden;padding:30px 38px}
+.sheet:before{content:'';position:absolute;inset:12px;border:2px solid #91c4d3;border-radius:3px;pointer-events:none}
+.sheet:after{content:'';position:absolute;left:16px;right:16px;top:16px;height:5px;background:repeating-linear-gradient(90deg,#65bcd1 0 90px,#fff 90px 100px,#ed818b 100px 190px,#fff 190px 200px,#e9bb4d 200px 290px,#fff 290px 300px,#8bb874 300px 390px,#fff 390px 400px);pointer-events:none}
+.topline{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4f6972;line-height:22px}
+.topline strong{color:var(--accent)}
+.topline .names{font-family:Travel;font-weight:400;font-size:19px}
+.card-head{height:139px;padding-top:17px;position:relative}
+.kicker{font-size:12px;color:#6a7880;line-height:19px}
+.card-head h1{font-family:Travel;font-size:48px;font-weight:400;line-height:1.35;margin:6px 0 5px;display:flex;align-items:center;gap:16px;white-space:nowrap}
+.card-head h1.long{font-size:41px}
+.art-title .letter{display:inline-block;-webkit-text-stroke:1.65px #343b3e;paint-order:stroke fill;text-shadow:0 2px 0 #ffffff}
+.art-title .letter:nth-child(5n+1){color:#64bfdf}
+.art-title .letter:nth-child(5n+2){color:#ec8794}
+.art-title .letter:nth-child(5n+3){color:#93bf65}
+.art-title .letter:nth-child(5n+4){color:#f4c354}
+.art-title .letter:nth-child(5n){color:#ef9f67}
+.head-number{font:700 24px Arial;color:var(--accent);display:grid;place-items:center;width:50px;height:50px;flex:none;border:2px solid var(--accent);border-radius:50%;transform:rotate(-6deg);background:#fff}
+.hero{height:332px;display:flex;gap:5px;position:relative;border:2px solid #425968;padding:5px;background:#fff;border-radius:3px;box-shadow:3px 4px 0 #dfeef0}
+.hero img{width:100%;height:100%;object-fit:cover;min-width:0}
+.hero.dual>img:first-child{width:67%}
+.hero.dual>img.secondary{width:calc(33% - 5px)}
+.hero.portrait{background:#f1f9fc}
+.hero.portrait>img{width:40%;object-fit:contain;background:#e0edf3}
+.photo-note{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.photo-note svg{width:122px;height:122px}
+.photo-note b{font:27px Travel;color:#337595;margin:5px 0 10px}
+.photo-note p{font-size:15px;line-height:1.8;margin:0}
+.photo-label{position:absolute;top:14px;left:14px;padding:5px 10px;background:#fffffff2;font-size:11px;color:#375466;border-radius:2px}
+.landmark{position:absolute;right:13px;bottom:12px;width:79px;height:79px;background:#fffffff2;border-radius:50%;padding:5px;border:2px dashed #75aab9;transform:rotate(6deg)}
+.image-caption{font-size:10px;color:#6e8189;margin:9px 0 0;line-height:16px;min-height:16px}
+.summary{padding-top:15px}
+.tagline{font:27px/1.4 Travel;color:var(--accent);margin:0 0 8px}
+.intro{font-size:14px;line-height:1.9;margin:0;min-height:53px}
+.info-columns{display:grid;grid-template-columns:1.19fr 1fr;gap:26px;margin-top:19px}
+.section-title{font:21px Travel;color:var(--accent);line-height:25px;margin:0 0 8px}
+.schedule{border-top:2px dashed #b8d5dd}
+.row{display:grid;grid-template-columns:94px 1fr;gap:6px;padding:10px 0;border-bottom:1px dashed #c4dae0;font-size:12px;line-height:1.75}
+.row b{color:var(--accent);font-size:11px}
+.side-copy{font-size:12px;line-height:1.8;margin:0 0 12px}
+.side-copy.note{font-size:11px;color:#5c737d}
+.scene{position:absolute;left:34px;right:34px;bottom:61px;height:291px;margin:0}
+.scene>img{width:100%;height:100%;object-fit:contain}
+.scene figcaption{position:absolute;bottom:-7px;width:100%;text-align:center;font:16px Travel;color:#497184}
+.scene.generic{display:grid;grid-template-columns:165px 1fr;align-items:center;gap:0}
+.scene.generic .travel-line{font:26px/1.65 Travel;color:#47839d;padding-left:8px;transform:rotate(-4deg)}
+.scene.generic>img{height:285px;object-fit:contain}
+.scene.generic figcaption{bottom:-4px}
+.footer{position:absolute;left:38px;right:38px;bottom:29px;border-top:1px solid #c9dce3;padding-top:10px;display:flex;justify-content:space-between;font-size:10px;color:#64818d}
+.footer strong{color:var(--accent)}
+
+/* 行前清单卡 (与大地图等比 1420px) */
+.sheet.checklist {
+  height: 1420px;
+}
+.checklist .card-head {
+  height: 136px;
+  padding-top: 14px;
+}
+.checklist .card-head h1 {
+  font-size: 42px;
+  gap: 0;
+}
+.check-block {
+  border-top: 2px dashed #b8d7df;
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 18px;
+  padding-top: 15px;
+  margin-bottom: 16px;
+}
+.check-block .art svg {
+  width: 72px;
+  height: 72px;
+}
+.check-block h2 {
+  font: 26px Travel;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+.check-block p {
+  font-size: 13.5px;
+  line-height: 1.8;
+  margin: 0 0 3px;
+}
+.check-last {
+  font-size: 11.5px;
+  line-height: 1.85;
+  color: #637e89;
+  border-top: 1px solid #c5dde4;
+  padding-top: 10px;
+  margin-top: 6px;
+}
+.checklist .scene {
+  height: 290px;
+  bottom: 50px;
+}
+.checklist .scene img {
+  height: 285px;
+}
+.checklist .scene.generic {
+  grid-template-columns: 210px 1fr;
+}
+.checklist .scene .travel-line {
+  font-size: 28px;
+}
+.checklist .footer {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  bottom: 20px;
+  border-top: 1px solid #c9dce3;
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #64818d;
+}
+
+/* 时间行程总表卡片 (与大地图等比 1420px) */
+.sheet.timetable {
+  height: 1420px;
+}
+.sheet.timetable .card-head {
+  height: 114px;
+  padding-top: 10px;
+}
+.sheet.timetable .card-head h1 {
+  font-size: 40px;
+  margin: 4px 0 2px;
+}
+.day-block {
+  border-radius: 4px;
+  margin-bottom: 9px;
+  border: 1.5px solid #c5dfe6;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(41, 143, 148, 0.05);
+}
+.day-block-header {
+  background: var(--day-color);
+  color: white;
+  padding: 5px 12px;
+  font: 16px Travel;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.day-block-header span {
+  font-size: 11px;
+  font-family: 'Microsoft YaHei', sans-serif;
+  opacity: 0.95;
+  font-weight: normal;
+}
+.day-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.day-table tr {
+  border-bottom: 1px dashed #e1edf0;
+}
+.day-table tr:last-child {
+  border-bottom: none;
+}
+.day-table td {
+  padding: 3.5px 8px;
+  vertical-align: middle;
+  line-height: 1.45;
+}
+.day-table .t-time {
+  width: 82px;
+  font-weight: 700;
+  color: var(--day-color);
+  white-space: nowrap;
+  font-size: 10.5px;
+}
+.day-table .t-spot {
+  width: 152px;
+  font-weight: 700;
+  color: #33434b;
+  white-space: nowrap;
+}
+.day-table .t-desc {
+  color: #556c77;
+  font-size: 10.5px;
+}
+
+.sheet.timetable .timetable-scene {
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  bottom: 46px;
+  height: 380px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sheet.timetable .timetable-scene img {
+  width: 100%;
+  height: 340px;
+  object-fit: contain;
+}
+.sheet.timetable .timetable-scene figcaption {
+  font: 20px Travel;
+  color: #2f7b9a;
+  text-align: center;
+  margin-top: 6px;
+}
+.sheet.timetable .footer {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  bottom: 20px;
+  border-top: 1px solid #c9dce3;
+  padding-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #64818d;
+}
+
+/* 离线画廊样式 */
+.gallery{max-width:1300px;margin:0 auto;padding:30px 28px 60px}
+.gallery-header{display:flex;align-items:center;justify-content:space-between;gap:25px;border-bottom:2px dashed #9dc8d6;padding-bottom:20px}
+.gallery-header h1{font:38px/1.3 Travel;margin:0 0 10px;color:#2f7b9a}
+.gallery-header p{margin:0;line-height:1.7;color:#546f7b;font-size:14px}
+.gallery-header .pair{width:145px;height:100px;object-fit:contain;flex:none}
+.nav{display:flex;gap:25px;flex-wrap:wrap;margin:20px 0 25px;font-size:14px}
+.nav a{text-underline-offset:5px}
+
+.cover-triad {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.cover-triad > div {
+  display: flex;
+  flex-direction: column;
+}
+.cover-triad img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.cover-triad h2, .gallery h2 {
+  font: 26px Travel;
+  color: #397b8f;
+  margin: 0 0 12px;
+}
+
+.gallery .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.tile{background:white;border-radius:4px;overflow:hidden;text-decoration:none;box-shadow:0 3px 10px rgba(47, 123, 154, 0.08)}
+.tile img{width:100%;height:auto}
+.tile b{display:block;padding:12px;font-size:14px}
+.gallery section{margin:36px 0 0}
+
+/* 角色设定英雄居中块 */
+.character-hero {
+  max-width: 540px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.character-hero a {
+  display: inline-block;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(47, 123, 154, 0.12);
+}
+.character-hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.character-hero p {
+  font: 18px Travel;
+  color: #2f7b9a;
+  margin: 12px 0 0;
+}
+
+/* 绘本风景画廊网格 (2x3) */
+.art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.art-item{background:white;padding:10px;border-radius:6px;box-shadow:0 3px 10px rgba(47, 123, 154, 0.08)}
+.art-grid img{width:100%;aspect-ratio:2.5;object-fit:contain;background:#fff;border-radius:4px}
+.gallery small{line-height:1.9;color:#607e8a;display:block;margin-top:28px}
+
+.contact{width:1800px;padding:32px;background:#edf7fa}
+.contact h1{font:43px Travel;color:#397b8f;margin:8px 0 25px}
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.contact-grid img{width:100%;border-radius:3px}
+.contact-grid p{font:22px Travel;margin:10px 0 3px;color:#397b8f}
+
+@media(max-width:760px){
+  .gallery{padding:20px 14px 35px}
+  .gallery-header{gap:8px}
+  .gallery-header h1{font-size:27px}
+  .gallery-header .pair{width:90px;height:85px}
+  .gallery-header p{font-size:12px}
+  .cover-triad{grid-template-columns:1fr;gap:22px}
+  .gallery .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .tile b{font-size:12px}
+  .character-hero{max-width:100%;margin-bottom:20px}
+  .art-grid{grid-template-columns:1fr;gap:16px}
+  .nav{gap:18px;font-size:13px}
+  .gallery section{margin-top:28px}
+}

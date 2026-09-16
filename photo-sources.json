@@ -1,0 +1,128 @@
+[
+  {
+    "id": "haikou",
+    "file": "photos/haikou.jpg",
+    "sourceUrl": "https://you.ctrip.com/sight/haikou37/52006.html",
+    "credit": "实景资料图：携程旅行 · 海口骑楼老街",
+    "notes": "Verified Haikou arcade shophouses (骑楼老街) and streetscape."
+  },
+  {
+    "id": "puqian",
+    "file": "photos/puqian.jpg",
+    "sourceUrl": "https://baike.so.com/gallery/list?eid=7629678",
+    "credit": "实景资料图：360百科 · 铺前老街骑楼图册",
+    "notes": "Verified Puqian Shengli Street arcade shophouses (铺前老街胜利街)."
+  },
+  {
+    "id": "mulan",
+    "file": "photos/mulan.jpg",
+    "sourceUrl": "https://m.hinews.cn/page?m=1&n=2729452&s=1044",
+    "imageUrl": "https://rmt-data.hinews.cn/common/img/IMG_5cde575812b44f0bbb3c952c7563cf5d.jpeg",
+    "credit": "符为骊 摄；南海网、新海南客户端",
+    "width": 900,
+    "height": 502,
+    "notes": "Verified actual 木栏头/木兰头灯塔, Wenchang: white cylindrical tower on rocky headland, beaches on both sides and distant wind turbines along the upper-left coast. Original JPEG bytes and lower-right 新海南客户端 watermark retained."
+  },
+  {
+    "id": "tonggu",
+    "file": "photos/tonggu.jpg",
+    "sourceUrl": "https://m.hinews.cn/page?m=1&n=2728350&s=1044",
+    "imageUrl": "https://rmt-data.hinews.cn/common/img/IMG_662146f250fd47bdada686a8e452b6a9.jpg",
+    "credit": "海南日报记者 袁琛 摄；南海网刊载",
+    "width": 900,
+    "height": 600,
+    "notes": "Caption explicitly identifies 在铜鼓岭俯瞰月亮湾. Verified hilltop view, green headland, curving white beach and blue sea. Original JPEG bytes and lower-right 海南日报客户端 watermark retained."
+  },
+  {
+    "id": "dongjiao",
+    "file": "photos/dongjiao.jpg",
+    "sourceUrl": "https://m.hinews.cn/page?m=1&n=2688870&s=1044",
+    "imageUrl": "https://rmt-data.hinews.cn/common/img/IMG_c139748cfc8a4876a3cd5a1a5fa0fc48.jpg",
+    "credit": "南海网拍客专栏摄影师 雪真 摄",
+    "width": 900,
+    "height": 600,
+    "notes": "Caption explicitly identifies 东郊椰林. Verified mature coconut palms, sand, beach visitors and sea along the right edge. Original JPEG bytes and lower-right 拍客/南海网栏目 watermark retained."
+  },
+  {
+    "id": "tanmen",
+    "file": "photos/tanmen.jpg",
+    "sourceUrl": "https://www.sohu.com/a/655762596_121124403",
+    "credit": "实景资料图：搜狐 ·《潭门渔港见闻》",
+    "notes": "Verified Tanmen fishing harbour, fishing boats and dock activity."
+  },
+  {
+    "id": "museum",
+    "file": "photos/museum.jpg",
+    "sourceUrl": "https://www.ecns.cn/visual/hd/2018/04-28/160212.shtml",
+    "credit": "实景资料图：中国新闻网 ECNS · 南海博物馆开馆图集",
+    "notes": "Verified China (Hainan) Museum of the South China Sea exterior and architecture."
+  },
+  {
+    "id": "fenjie",
+    "file": "photos/fenjie.jpg",
+    "sourceUrl": "https://www.hnfjz.com/",
+    "imageUrl": "https://img.wanwang.xin/contents/sitefiles2072/10363392/images/56560395.jpeg",
+    "credit": "海南分界洲旅游股份有限公司／分界洲岛景区官网",
+    "width": 1920,
+    "height": 1080,
+    "notes": "Official homepage photographic asset, referenced by its public Body.js. Verified top-down aerial view of the island's tropical hillside bungalows, palm-lined waterfront, rocky shoreline and clear turquoise reef water."
+  },
+  {
+    "id": "hyatt",
+    "file": "photos/hyatt.jpg",
+    "sourceUrl": "https://www.hyatt.com/hyatt-regency/zh-CN/hakrh-hyatt-regency-hainan-ocean-paradise-resort",
+    "imageUrl": "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2022/07/22/0247/HAKRH-P0010-Exterior-Night-View.jpg/HAKRH-P0010-Exterior-Night-View.16x9.jpg?imwidth=2560",
+    "credit": "Hyatt／海南富力海洋欢乐世界度假区凯悦酒店官网",
+    "width": 2560,
+    "height": 1440,
+    "notes": "Official HAKRH property exterior-night-view hero photograph. Verified HYATT REGENCY building sign, shell-inspired hotel facade, entrance canopy and the adjacent blue Ferris wheel."
+  },
+  {
+    "id": "oceanpark",
+    "file": "photos/oceanpark.jpg",
+    "sourceUrl": "https://www.opresort.cn/web/flhy/rmtj/mtl.html",
+    "imageUrl": "https://www.opresort.cn/web/cdn.chimelong.com/upload/img/mtl1.jpg",
+    "credit": "海南海洋欢乐世界／海南富力海洋欢乐世界度假区官网",
+    "width": 1095,
+    "height": 500,
+    "notes": "Official 南海之眼摩天轮 attraction photograph. Verified blue wheel with yellow cabins, lagoon, round waterfront pavilion and covered theatre."
+  },
+  {
+    "id": "xincun",
+    "file": "photos/xincun.jpg",
+    "sourceUrl": "https://m.thepaper.cn/newsDetail_forward_21141726?commTag=true",
+    "credit": "实景资料图：澎湃新闻 ·《陵水·新村渔港：疍家风情》",
+    "notes": "Verified Danjia floating fish pen village (疍家水上浮城) in Xincun harbour."
+  },
+  {
+    "id": "monkey",
+    "file": "photos/monkey.jpg",
+    "sourceUrl": "https://www.hainanta.org.cn/html/948/2024-10-18/content-1478.html",
+    "imageUrl": "https://www.hainanta.org.cn/attachment/cms/item/2025_01/08_15/36a1a1300ab66d28.jpg",
+    "credit": "南湾猴岛生态旅游区供图；海南省旅游协会刊载",
+    "width": 1280,
+    "height": 721,
+    "notes": "The tourism-association article explicitly credits all text and images to 南湾猴岛生态旅游区. Verified yellow cable-car cabin and overhead cables above Xincun harbour, with floating fishing rafts."
+  },
+  {
+    "id": "fairmont-river",
+    "file": "photos/fairmont-river.jpg",
+    "sourceUrl": "https://www.snaptaste.com/fairmont-sanya-haitang-bay/",
+    "credit": "实景资料图：Snaptaste · 费尔蒙韵河木船",
+    "notes": "Verified Fairmont Sanya Haitang Bay traditional canal boat on the Yunhe river."
+  },
+  {
+    "id": "fairmont-official",
+    "file": "photos/fairmont-official.jpg",
+    "sourceUrl": "https://www.fairmont.com/en/hotels/sanya/fairmont-sanya-haitang-bay.html",
+    "credit": "实景资料图：Fairmont / Accor 酒店官网",
+    "notes": "Verified Fairmont Sanya Haitang Bay Chinese architecture, pool and garden grounds."
+  },
+  {
+    "id": "linwang",
+    "file": "photos/linwang.jpg",
+    "sourceUrl": "https://touch.travel.qunar.com/comment/9007769?bd_source=baidupz1",
+    "credit": "实景资料图：去哪儿攻略 · 林旺夜市",
+    "notes": "Verified Linwang night food stalls and lively evening dinner atmosphere."
+  }
+]
