@@ -57,14 +57,32 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // 绑定自定义行程制定器选项点击事件
+  // 绑定自定义行程制定器选项点击事件（支持即时实时联动）
   document.querySelectorAll("#chips-places input[type=\"checkbox\"], #chips-night input[type=\"radio\"], #chips-tempo input[type=\"radio\"]").forEach(inp => {
-    inp.addEventListener("change", updateChipStyles);
+    inp.addEventListener("change", function() {
+      updateChipStyles();
+      generateCustomPlan(false); // 选项变化时静默实时更新，不滚屏
+    });
   });
 
   // 初始默认生成一次定制行程
   resetPlanner();
 });
+
+function showToast(message) {
+  let toast = document.querySelector(".global-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "global-toast";
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = message;
+  toast.classList.add("show");
+  if (window._toastTimer) clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
 
 function updateChipStyles() {
   document.querySelectorAll("#chips-places .chip-item").forEach(item => {
@@ -109,10 +127,10 @@ function resetPlanner() {
   if (tempoDef) tempoDef.checked = true;
 
   updateChipStyles();
-  generateCustomPlan();
+  generateCustomPlan(false);
 }
 
-function generateCustomPlan() {
+function generateCustomPlan(isUserClick = true) {
   const selectedPlaces = [];
   document.querySelectorAll("#chips-places .chip-item").forEach(item => {
     const chk = item.querySelector("input[type=\"checkbox\"]");
@@ -165,6 +183,7 @@ function generateCustomPlan() {
   if (selectedPlaces.some(p => p.id === "yalong")) badges.push("索桥小勇士");
   if (selectedPlaces.some(p => p.id === "marina")) badges.push("掌舵小船长");
   if (selectedPlaces.some(p => p.id === "atlantis")) badges.push("深海探索家");
+  if (selectedPlaces.some(p => p.id === "fairmont")) badges.push("演艺鉴赏家");
   if (badges.length === 0) badges.push("海岛度假达人");
   const badgeEl = document.getElementById("m-badge");
   if (badgeEl) badgeEl.textContent = "🏅 " + badges.join(" + ");
@@ -223,6 +242,40 @@ function generateCustomPlan() {
   const day6Html = "<b>Day 6 (10.1) · 悠闲早午餐 ➔ 沿海大道车览 ➔ 机场还车返程：</b><br>10:00 睡到自然醒享用费尔蒙丰盛自助早午餐 ➔ 11:30 退房 ➔ 驱车沿椰梦长廊景观大道海景车览（吹海风拍美照不下海防虫）➔ 14:00 到达三亚凤凰国际机场顺畅还车，满载欢乐飞返温馨家园！";
   day6Div.innerHTML = "<div class=\"res-day-title\">✈️ 10月1日 (Day 6 上午) · 告别三亚从容返程</div><p style=\"margin:0; font-size:13.5px; line-height:1.7; color:#37474f;\">" + day6Html + "</p>";
   daysList.appendChild(day6Div);
+
+  // 关键：务必确保结果卡片 display = block！
+  const resCard = document.getElementById("custom-result");
+  if (resCard) {
+    resCard.style.display = "block";
+  }
+
+  // 若为用户主动点击按钮生成，赋予极强烈的视觉反馈与平滑滚动
+  if (isUserClick) {
+    const btn = document.getElementById("btn-generate");
+    if (btn) {
+      const originHtml = btn.innerHTML;
+      btn.innerHTML = "<span>✨ 正在智能规划最优动线...</span>";
+      btn.style.opacity = "0.85";
+      setTimeout(() => {
+        btn.innerHTML = "<span>✅ 专属定制路线已生成！</span>";
+        btn.style.opacity = "1";
+        setTimeout(() => {
+          btn.innerHTML = originHtml;
+        }, 1800);
+      }, 250);
+    }
+
+    if (resCard) {
+      resCard.classList.remove("highlight-pulse");
+      void resCard.offsetWidth; // 触发 reflow 重置动画
+      resCard.classList.add("highlight-pulse");
+
+      // 平滑滚动定位到结果卡片
+      resCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    showToast("🎉 已为您生成专属三亚定制方案！包含 " + selectedPlaces.length + " 项核心体验，请在下方查阅~");
+  }
 }
 
 function copyPlanToClipboard() {
@@ -253,6 +306,7 @@ function copyPlanToClipboard() {
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
+      showToast("📋 行程方案已复制到剪贴板！可以直接粘贴到微信群啦~");
       alert("🎉 行程方案已复制到剪贴板！可以直接粘贴到微信群给家人讨论啦~");
     }).catch(() => {
       prompt("请长按复制下方行程文本：", text);
