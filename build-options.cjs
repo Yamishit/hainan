@@ -1,0 +1,721 @@
+const fs = require('fs');
+
+const content = `<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>三亚后半程8大备选景点深度评测与选型指南 · 咚咚与甜心的海南大冒险</title>
+  <link rel="stylesheet" href="style.css?v=20260916_v33">
+  <style>
+    body {
+      background: #f0f7f9;
+      color: #2c3e50;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+    .header-box {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(47, 123, 154, 0.08);
+      border-top: 5px solid #2f7b9a;
+    }
+    .header-box h1 {
+      font-family: Travel, sans-serif;
+      font-size: 32px;
+      color: #2f7b9a;
+      margin: 0 0 10px;
+    }
+    .header-meta {
+      font-size: 14px;
+      color: #607d8b;
+      line-height: 1.8;
+    }
+    .header-meta b {
+      color: #37474f;
+    }
+    .nav-bar {
+      display: flex;
+      gap: 16px;
+      margin: 18px 0 0;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: #e1f5fe;
+      color: #0277bd;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: #b3e5fc;
+      transform: translateY(-1px);
+    }
+    
+    /* 决策大表 */
+    .table-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 16px rgba(47, 123, 154, 0.08);
+      overflow-x: auto;
+    }
+    .table-card h2 {
+      font-family: Travel, sans-serif;
+      font-size: 24px;
+      color: #2f7b9a;
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 900px;
+    }
+    .compare-table th {
+      background: #e8f4f8;
+      color: #37474f;
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: bold;
+      border-bottom: 2px solid #b0bec5;
+      white-space: nowrap;
+    }
+    .compare-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #eceff1;
+      vertical-align: middle;
+    }
+    .compare-table tr:hover {
+      background: #f5fbfe;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .badge-super { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .badge-good { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+    .badge-medium { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+    .badge-warn { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+    
+    /* 8大景点卡片网格 */
+    .spot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .spot-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(47, 123, 154, 0.08);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e0f2f1;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .spot-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(47, 123, 154, 0.14);
+    }
+    .spot-img-box {
+      width: 100%;
+      height: 230px;
+      position: relative;
+      background: #cfd8dc;
+      overflow: hidden;
+    }
+    .spot-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .spot-card:hover .spot-img-box img {
+      transform: scale(1.03);
+    }
+    .spot-tag-floating {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .tag-top { background: linear-gradient(135deg, #ff7043, #f4511e); }
+    .tag-star { background: linear-gradient(135deg, #26a69a, #00897b); }
+    .tag-warn { background: linear-gradient(135deg, #78909c, #546e7a); }
+    
+    .spot-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .spot-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .spot-title {
+      font-family: Travel, sans-serif;
+      font-size: 22px;
+      color: #2f7b9a;
+      margin: 0;
+    }
+    .spot-loc {
+      font-size: 12px;
+      color: #78909c;
+      font-weight: normal;
+    }
+    .spot-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0 14px;
+      font-size: 12px;
+      text-align: center;
+      gap: 6px;
+    }
+    .kpi-item span {
+      display: block;
+      color: #90a4ae;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+    .kpi-item b {
+      color: #37474f;
+      font-size: 13px;
+    }
+    .spot-desc {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: #455a64;
+      margin: 0 0 12px;
+    }
+    .spot-section {
+      margin-top: 10px;
+      border-top: 1px dashed #cfd8dc;
+      padding-top: 10px;
+    }
+    .spot-section-title {
+      font-size: 12.5px;
+      font-weight: bold;
+      color: #2f7b9a;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .spot-section-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #546e7a;
+      margin: 0;
+    }
+    .spot-verdict {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid #eceff1;
+      font-size: 13px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .verdict-good { color: #2e7d32; }
+    .verdict-warn { color: #d84315; }
+    
+    /* 推荐组合方案区 */
+    .plans-box {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(47, 123, 154, 0.08);
+      margin-bottom: 24px;
+    }
+    .plans-box h2 {
+      font-family: Travel, sans-serif;
+      font-size: 26px;
+      color: #2f7b9a;
+      margin: 0 0 20px;
+    }
+    .plan-card {
+      background: #f8fbfe;
+      border-left: 5px solid #2f7b9a;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+    }
+    .plan-card:last-child {
+      margin-bottom: 0;
+    }
+    .plan-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1565c0;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .plan-desc {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #455a64;
+      margin: 0;
+    }
+
+    @media (max-width: 820px) {
+      .spot-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 16px 12px 60px;
+      }
+      .header-box {
+        padding: 20px 16px;
+      }
+      .header-box h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 顶部导言 -->
+  <header class="header-box">
+    <h1>🌴 三亚后半程 8 大备选景点深度评测与选型指南</h1>
+    <div class="header-meta">
+      <b>同行档案：</b>两家同行 · 4位大人 + 咚咚（7岁半）+ 甜心（9岁）· 一台大空间MPV自驾<br>
+      <b>驻地基点：</b>海棠湾熹棠费尔蒙酒店（Fairmont Sanya Haitang Bay · 2026.09.28—10.01）<br>
+      <b>决策核心：</b>顺路度（拒绝把时间浪费在横跨三亚的路上）、适儿度（7~9岁孩子要有沉浸感与成就感）、避开暴晒排队与人流拥堵。
+    </div>
+    <div class="nav-bar">
+      <a class="nav-btn" href="index.html">⬅️ 返回前三日路书画廊主页</a>
+      <a class="nav-btn" href="#compare-table">📊 8大景点快速对比总表</a>
+      <a class="nav-btn" href="#spot-cards">🏝️ 景点深度图文拆解</a>
+      <a class="nav-btn" href="#recom-plans">🎯 推荐行程组合搭配</a>
+    </div>
+  </header>
+
+  <!-- 决策对比大表 -->
+  <section class="table-card" id="compare-table">
+    <h2>📊 8 大热门备选景点横向对比矩阵</h2>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>景点名称</th>
+          <th>费尔蒙出发距离/车程</th>
+          <th>顺路指数</th>
+          <th>适儿指数 (7~9岁)</th>
+          <th>4大2小预计门票预算</th>
+          <th>推荐等级</th>
+          <th>一句话核心裁决</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>01 皇后湾 / 后海村</b></td>
+          <td>11 公里 / 约 15 分钟</td>
+          <td><span class="badge badge-super">★★★★★ 极顺路</span></td>
+          <td><span class="badge badge-super">★★★★★ 亲子首推</span></td>
+          <td><b>0 元</b> (冲浪体验另计)</td>
+          <td><span class="badge badge-super">🔥 极力推荐</span></td>
+          <td>大潮免费赶海摸海星抓螃蟹、儿童冲浪站板成就感爆棚，车程仅15分钟！</td>
+        </tr>
+        <tr>
+          <td><b>02 亚龙湾热带天堂森林公园</b></td>
+          <td>30 公里 / 约 35 分钟</td>
+          <td><span class="badge badge-good">★★★★☆ 顺路</span></td>
+          <td><span class="badge badge-good">★★★★☆ 很适合</span></td>
+          <td>约 700 - 850 元</td>
+          <td><span class="badge badge-super">🔥 极力推荐</span></td>
+          <td>山顶俯瞰天下第一湾，过江龙索桥锻炼孩子胆量，敞篷过山车般游览车超刺激。</td>
+        </tr>
+        <tr>
+          <td><b>03 鹿回头风景区</b></td>
+          <td>36 公里 / 约 40 分钟</td>
+          <td><span class="badge badge-good">★★★☆☆ 较顺路</span></td>
+          <td><span class="badge badge-good">★★★★☆ 很适合</span></td>
+          <td><b>0元大门票</b> (车费约140元)</td>
+          <td><span class="badge badge-good">👍 强烈推荐</span></td>
+          <td>免大门票！傍晚不晒山风凉爽，俯瞰三亚全城与凤凰岛壮丽落日夜景。</td>
+        </tr>
+        <tr>
+          <td><b>04 半山半岛帆船港</b></td>
+          <td>38 公里 / 约 42 分钟</td>
+          <td><span class="badge badge-good">★★★☆☆ 较顺路</span></td>
+          <td><span class="badge badge-medium">★★★☆☆ 视玩法而定</span></td>
+          <td><b>0 元</b> (出海掌舵约600-900)</td>
+          <td><span class="badge badge-good">👍 体验推荐</span></td>
+          <td>若仅陆地拍照较无聊；若包帆船出海让孩子自己掌舵压舷，成就感直冲云霄！</td>
+        </tr>
+        <tr>
+          <td><b>05 蜈支洲岛</b></td>
+          <td>13 公里 / 约 18 分钟</td>
+          <td><span class="badge badge-super">★★★★★ 极近</span></td>
+          <td><span class="badge badge-medium">★★★☆☆ 适中偏累</span></td>
+          <td>约 900 - 1500 元</td>
+          <td><span class="badge badge-medium">⏳ 视情备选</span></td>
+          <td>水质绝美，但Day 2已去过分界洲岛；岛上排队暴晒多、商业浓，水上项目孩子有限制。</td>
+        </tr>
+        <tr>
+          <td><b>06 椰梦长廊 (三亚湾)</b></td>
+          <td>42 公里 / 约 50 分钟</td>
+          <td><span class="badge badge-medium">★★★☆☆ 顺道打卡</span></td>
+          <td><span class="badge badge-medium">★★★☆☆ 一般</span></td>
+          <td><b>0 元 (市政开放海滩)</b></td>
+          <td><span class="badge badge-medium">⏳ 仅傍晚路过</span></td>
+          <td>日落极美，但专程从海棠湾跑去不划算；沙滩小黑飞（蠓虫）极多易叮咬孩子。</td>
+        </tr>
+        <tr>
+          <td><b>07 西岛</b></td>
+          <td>55 公里 / 约 55 分钟+乘船</td>
+          <td><span class="badge badge-warn">★★☆☆☆ 偏远</span></td>
+          <td><span class="badge badge-good">★★★★☆ 文艺慢游</span></td>
+          <td>约 550 - 700 元</td>
+          <td><span class="badge badge-medium">⏳ 备选方案</span></td>
+          <td>400年渔村与珊瑚老屋很慢调，但偏西较远，若去过分界洲岛则海岛类型重合。</td>
+        </tr>
+        <tr>
+          <td><b>08 南山文化旅游区</b></td>
+          <td>78 公里 / 约 1小时35分钟</td>
+          <td><span class="badge badge-warn">★☆☆☆☆ 极不顺路</span></td>
+          <td><span class="badge badge-warn">★★☆☆☆ 容易喊累</span></td>
+          <td>约 750 - 900 元</td>
+          <td><span class="badge badge-warn">⚠️ 亲子慎选</span></td>
+          <td>横跨整个三亚，往返车程3个半小时；大广场暴晒且以宗教瞻仰为主，孩子极易疲惫哭闹。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8大景点图文深度拆解 -->
+  <section id="spot-cards">
+    <div class="spot-grid">
+
+      <!-- 1. 皇后湾 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/houhai.webp" alt="皇后湾与后海角冲浪赶海实景">
+          <span class="spot-tag-floating tag-top">🔥 亲子首推 · 成就感爆棚</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">01 皇后湾 (后海角 / 铁炉港)</h3>
+            <span class="spot-loc">海棠湾后海 · 距酒店11km (15分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★★★</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★★★ 爆表</b></div>
+            <div class="kpi-item"><span>门票开销</span><b>0 元 (全开放)</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>半月形野趣海湾，背靠海棠湾原生椰林与礁石岬角。海水浅而清澈，浪花柔和雪白，既有原生态渔村的生活烟火，又是享誉全国的轻量冲浪与赶海宝地。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与成就感：</div>
+            <p class="spot-section-text">① <b>儿童冲浪站板挑战：</b>7~9岁是学冲浪的黄金年龄，浪小水浅，专业教练带2次推板即可成功站上冲浪板滑向岸边，拍照英姿飒爽，自豪感铭刻一生！<br>
+            ② <b>八月十八天文大潮赶海：</b>正值中秋超级大退潮，铁炉港大面积礁石裸露，亲手抓面包海星、捡花蛤、摸小海胆，装满观察桶，收获满满！</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">穿防滑潜水鞋防藤壶划脚；冲浪选傍晚15:30之后，避开正午烈日。</p>
+          </div>
+          <div class="spot-verdict verdict-good">✅ 裁决：海棠湾后花园，零赶路负担，亲子体验感绝对第一名！</div>
+        </div>
+      </article>
+
+      <!-- 2. 亚龙湾热带天堂森林公园 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/yalong_forest.webp" alt="亚龙湾热带天堂森林公园俯瞰全景">
+          <span class="spot-tag-floating tag-star">🌟 极力推荐 · 登高望海</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">02 亚龙湾热带天堂森林公园</h3>
+            <span class="spot-loc">亚龙湾度假区 · 距酒店30km (35分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★★☆</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★★☆ 超兴奋</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>约 750-850 元</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>《非诚勿扰2》经典取景地。连绵青翠雨林环抱碧海蓝天，登临山巅沧海楼，可360度居高临下饱览月牙形“天下第一湾”亚龙湾的浩瀚壮丽。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与成就感：</div>
+            <p class="spot-section-text">① <b>刺激的雨林敞篷穿梭车：</b>在盘山公路上呼啸转弯，司机鸣笛互动，两家孩子每次坐车都开心大叫；<br>
+            ② <b>过江龙索桥与玻璃栈道勇气挑战：</b>悬空横跨两座翠峰，咚咚与甜心相互鼓励走完全程，瞬间收获“小小探险家”成就！</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">务必上午 08:30-09:00 第一批入园！此时山间晨雾微凉、人流稀少；正午11:30下山正好去亚龙湾东榕美食广场吃椰子鸡或海鲜午餐。</p>
+          </div>
+          <div class="spot-verdict verdict-good">✅ 裁决：距海棠湾仅半小时车程，山海双全，极度推荐安排半天！</div>
+        </div>
+      </article>
+
+      <!-- 3. 鹿回头风景区 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/luhuitou.webp" alt="鹿回头俯瞰三亚全城日落与夜景实景">
+          <span class="spot-tag-floating tag-star">👍 强烈推荐 · 免大门票</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">03 鹿回头风景区</h3>
+            <span class="spot-loc">大东海鹿回头半岛 · 距酒店36km (40分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★☆☆</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★★☆ 轻松惬意</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>约 140 元 (仅车费)</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>三亚市区唯一的制高点半岛公园，三面临海。山顶矗立着著名的黎族神鹿传说雕像，傍晚在此可以一览三亚湾、大东海、凤凰岛及主城区的夕阳与璀璨夜景。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与成就感：</div>
+            <p class="spot-section-text">① <b>夕阳与夜景时光机：</b>17:30 乘观光车上山，先看金红色的晚霞染透大海，18:45 见证山脚下万家灯火与凤凰岛七彩灯光秀亮起，孩子视野极开阔；<br>
+            ② <b>神鹿寻宝与望远镜观城：</b>山顶有投币高倍观海望远镜，孩子寻找远处的万吨邮轮，听黎族神话传说。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">免大门票超划算！山上偶尔有野生猴子，提醒小朋友收好手中零食和饮料，不要去挑逗投喂。</p>
+          </div>
+          <div class="spot-verdict verdict-good">✅ 裁决：傍晚最舒适的登高看夜景胜地，可与半山半岛帆船港顺路串联！</div>
+        </div>
+      </article>
+
+      <!-- 4. 半山半岛帆船港 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/marina.webp" alt="半山半岛帆船港百艘游艇与灯塔实景">
+          <span class="spot-tag-floating tag-star">👍 体验推荐 · 扬帆掌舵</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">04 半山半岛帆船港</h3>
+            <span class="spot-loc">鹿回头半岛南侧 · 距酒店38km (42分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★☆☆</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>出海★★★★★ / 纯走★★☆</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>陆地0元 / 帆船包船700-900</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>国际级专业帆船码头，碧蓝港湾停泊着上百艘洁白无瑕的双体帆船与豪华游艇。白色防波堤灯塔、滨海欧式栈桥，对面的吉庆广场有欧式教堂与复古巴士。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与成就感：</div>
+            <p class="spot-section-text">① <b>亲子帆船出海实操（高阶玩法）：</b>两家包一艘40尺竞速/双体帆船（1小时），在船长指导下让咚咚与甜心亲手转动舵轮、体验帆船倾斜压舷与升帆，感受“征服大海的小船长”滋味！<br>
+            ② <b>码头散步喂鱼：</b>如果不出海，带孩子在木栈道看停泊的豪华游艇，给港池里成群的热带小鱼投喂面包屑。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">如果纯陆地散步拍照半小时就够；若想让孩子终生难忘，建议提前预约一艘正规帆船下午16:00出海！</p>
+          </div>
+          <div class="spot-verdict verdict-good">✅ 裁决：距离鹿回头仅5分钟车程，帆船掌舵是拉满成就感的隐藏王牌！</div>
+        </div>
+      </article>
+
+      <!-- 5. 蜈支洲岛 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/wuzhizhou.webp" alt="蜈支洲岛白沙滩与玻璃海实景">
+          <span class="spot-tag-floating tag-warn">⏳ 视情备选 · 易与前日重复</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">05 蜈支洲岛</h3>
+            <span class="spot-loc">海棠湾镇 · 距酒店13km (18分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★★★ 极近</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★☆☆ (受限于排队)</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>约 900 - 1500 元</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>“中国的马尔代夫”，全三亚水质最透明、能见度最高的顶级海岛。情人桥、观日岩悬崖海景极为震撼，白沙如糖细腻。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与限制：</div>
+            <p class="spot-section-text">① <b>水质与环岛观光车：</b>坐豪华电瓶车可进入步行不可达的后山悬崖公路，风景绝美；沙滩踩水喂鱼很舒服；<br>
+            ② <b>亲子痛点与避坑：</b>Day 2 我们已经深度游玩了分界洲岛（有喂魔鬼鱼和玻璃海）。蜈支洲岛商业化极浓，往返排队乘大船、等观光车消耗大量体力；绝大部分水上极限项目限制10岁以上或1.4米以上，7岁半咚咚多数玩不了。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">若去务必买豪华环岛车票避免徒步暴晒；国庆假期客流极多，需提早登岛。</p>
+          </div>
+          <div class="spot-verdict verdict-warn">⚠️ 裁决：距离极近但与分界洲岛体验重合度高，排队较累，作为备选。</div>
+        </div>
+      </article>
+
+      <!-- 6. 椰梦长廊 (三亚湾) -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/yemeng.webp" alt="三亚湾椰梦长廊傍晚椰林夕阳实景">
+          <span class="spot-tag-floating tag-warn">⏳ 顺路看看 · 慎重停留</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">06 椰梦长廊 (三亚湾)</h3>
+            <span class="spot-loc">三亚湾沿海大道 · 距酒店42km (50分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★★☆☆</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★☆☆ 容易被虫咬</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>0 元 (市政开放绿地)</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>紧邻三亚湾的20公里滨海椰林景观大道。傍晚夕阳西沉时，整面大海与椰影被晚霞染成金红色，拍照视觉大片感极强。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与限制：</div>
+            <p class="spot-section-text">① <b>落日大片：</b>海滩边散步、看红霞落日，踩踩泥沙；<br>
+            ② <b>亲子致命雷区（小黑飞蠓虫）：</b>近年三亚湾沙滩草丛中有极多微小的“海蠓”，被咬后奇痒无比且起大红肿包，小朋友皮肤娇嫩极易中招！且三亚湾水质和沙质偏黄暗，远逊于海棠湾和亚龙湾。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">若前往必须喷涂专用的避蚊胺防蠓水；专程从海棠湾往返100公里只为看日落性价比不高，仅推荐去机场顺路车览。</p>
+          </div>
+          <div class="spot-verdict verdict-warn">⚠️ 裁决：有蠓虫风险且沙质一般，只建议返程路过，不建议专程久留。</div>
+        </div>
+      </article>
+
+      <!-- 7. 西岛 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/west_island.webp" alt="西岛百年珊瑚石老屋与牛王岛实景">
+          <span class="spot-tag-floating tag-warn">⏳ 备选方案 · 偏西偏远</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">07 西岛 (原住民文艺渔村)</h3>
+            <span class="spot-loc">三亚湾西侧海域 · 距酒店55km (55分+船15分)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★★☆☆☆ 偏西</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★★★☆ 文艺骑行</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>约 550 - 700 元</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>三亚唯一保留百年原住民村落的海岛。岛上有用坚固珊瑚石砌筑的老房子、复古渔船改建的小店，以及海蚀地貌极其雄奇的牛王岛。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法：</div>
+            <p class="spot-section-text">① <b>漫游文艺渔村：</b>租电瓶车在三角梅盛开的渔村穿行，文创小店喝椰子冰沙；<br>
+            ② <b>牛王岭看壮阔海蚀崖：</b>穿过金鸡角木栈道，看惊涛拍岸与孤独守望的海上铜牛雕塑。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">西岛位置偏西，从海棠湾自驾加等船单程需近1.5小时；若孩子对渔村人文兴趣一般，更建议把精力留给海棠湾本地。</p>
+          </div>
+          <div class="spot-verdict verdict-warn">⚠️ 裁决：风情极佳但距离较远，需消耗整整一天时间，优先度低于森林公园。</div>
+        </div>
+      </article>
+
+      <!-- 8. 南山文化旅游区 -->
+      <article class="spot-card">
+        <div class="spot-img-box">
+          <img loading="lazy" src="candidates/nanshan.webp" alt="南山文化旅游区108米海上观音实景">
+          <span class="spot-tag-floating tag-warn">⚠️ 亲子慎选 · 距离极远</span>
+        </div>
+        <div class="spot-body">
+          <div class="spot-title-row">
+            <h3 class="spot-title">08 南山文化旅游区</h3>
+            <span class="spot-loc">三亚崖州区最西端 · 距酒店78km (1.5小时+)</span>
+          </div>
+          <div class="spot-kpis">
+            <div class="kpi-item"><span>顺路度</span><b>★☆☆☆☆ 极不顺路</b></div>
+            <div class="kpi-item"><span>孩子体验</span><b>★★☆☆☆ 容易枯燥喊累</b></div>
+            <div class="kpi-item"><span>4大2小预算</span><b>约 750 - 900 元</b></div>
+          </div>
+          <p class="spot-desc"><b>景色特点：</b>国家5A级景区，以矗立在蔚蓝南海上的108米三面观音圣像举世闻名。园区内依山傍海，分布着盛唐风格的南山寺与禅意园林。</p>
+          <div class="spot-section">
+            <div class="spot-section-title">🎯 亲子核心玩法与问题：</div>
+            <p class="spot-section-text">① <b>朝圣与祈福：</b>抱佛脚、瞻仰壮丽观音圣像、品尝南山素斋；<br>
+            ② <b>亲子巨大劝退点：</b>从海棠湾往返车程超过 **160公里（来回3.5小时）**！整个景区占地极广，水泥石板路步行极多，几乎没有儿童互动游乐项目，正午暴晒反射强烈，7岁和9岁孩子极易烦躁中暑。</p>
+          </div>
+          <div class="spot-section">
+            <div class="spot-section-title">💡 亲子贴士：</div>
+            <p class="spot-section-text">除非两家长辈有极为坚定的宗教朝圣许愿需求，否则纯亲子度假强烈建议果断舍弃！</p>
+          </div>
+          <div class="spot-verdict verdict-warn">❌ 裁决：距离最远、最耗车程、最暴晒，亲子出行性价比最低！</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 推荐组合方案 -->
+  <section class="plans-box" id="recom-plans">
+    <h2>🎯 针对 9.29 - 10.01 的 3 种最优行程组合搭配</h2>
+
+    <div class="plan-card">
+      <div class="plan-title">
+        <span>方案 A（最强亲子体验流）：海棠湾慢调 + 皇后湾冲浪赶海 + 亚龙湾森林公园（最推荐）</span>
+        <span class="badge badge-super">推荐指数：★★★★★</span>
+      </div>
+      <p class="plan-desc">
+        <b>Day 4（9.29）：</b>上午费尔蒙泳池与韵河泛舟 ➔ 午餐海棠湾中华老字号【沿江海南菜】 ➔ 下午前往<b>皇后湾</b>让咚咚与甜心完成【儿童冲浪站板】挑战 ➔ 傍晚八月十八超级大退潮【铁炉港礁石免费赶海摸海星】 ➔ 晚餐太琼糟粕醋火锅。<br>
+        <b>Day 5（9.30）：</b>清晨出发避暑游玩<b>亚龙湾热带天堂森林公园</b>（过江龙索桥挑战+俯瞰天下第一湾） ➔ 亚龙湾东榕美食广场午餐 ➔ 下午亚特兰蒂斯失落的空间水族馆吹冷气 ➔ 晚上费尔蒙海滩手电筒抓沙蟹。<br>
+        <b>Day 6（10.1）：</b>避开国庆大景区人流，酒店悠闲早午餐 ➔ 逛三亚国际免税城 ➔ 从容自驾40分钟至凤凰机场还车返程。
+      </p>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">
+        <span>方案 B（海陆空奇趣探险流）：森林公园索桥 + 半山半岛帆船出海掌舵 + 鹿回头落日夜景</span>
+        <span class="badge badge-good">推荐指数：★★★★☆</span>
+      </div>
+      <p class="plan-desc">
+        <b>适合喜欢新鲜体验的孩子：</b>将市区半岛行程巧妙整合。<br>
+        <b>Day 4（9.29）：</b>上午亚龙湾森林公园探险 ➔ 下午至半山半岛帆船港，包帆船出海1小时让孩子体验<b>“小小船长亲手掌舵”</b> ➔ 傍晚直接登上紧邻的<b>鹿回头公园</b>，山风微凉，俯瞰三亚湾金红日落与整座城市灯火亮起。<br>
+        <b>Day 5（9.30）：</b>海棠湾皇后湾冲浪与铁炉港大退潮赶海，回归海滩纯粹快乐。
+      </p>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-title">
+        <span>方案 C（文艺海岛与慢漫游）：西岛原住民渔村 + 皇后湾休闲</span>
+        <span class="badge badge-medium">推荐指数：★★★☆☆</span>
+      </div>
+      <p class="plan-desc">
+        <b>如果执意想在后半程再上一个小岛：</b><br>
+        放弃高消费且排队严重的蜈支洲岛，选择<b>西岛</b>。乘坐电瓶车在珊瑚石古村落穿梭，探秘牛王岛海蚀悬崖，下午返回市区时在三亚湾椰梦长廊短暂停车看晚霞，晚餐在市区吃第一市场地道海鲜。
+      </p>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
+`;
+
+fs.writeFileSync('sanya-options.html', content, 'utf8');
+console.log('Written sanya-options.html, size:', fs.statSync('sanya-options.html').size);
