@@ -4,8 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
   <title>咚咚与甜心的海南大冒险</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="vendor/photoswipe.css">
+  <link rel="stylesheet" href="style.css?v=20260916_v33">
+  <link rel="stylesheet" href="vendor/photoswipe.css?v=5.4.3">
+  <style>
+    /* 关键排版尺寸与防错乱保护样式 (Critical Layout CSS) */
+    .cover-triad { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; align-items: stretch; }
+    .cover-triad > div { display: flex; flex-direction: column; }
+    .cover-triad a { display: block; flex: 1; }
+    .cover-triad img { width: 100%; height: auto; display: block; border-radius: 4px; }
+    .cover-triad > div:first-child img { aspect-ratio: 941 / 1672; }
+    .cover-triad > div:nth-child(2) img, .cover-triad > div:nth-child(3) img { aspect-ratio: 1600 / 2840; }
+    .gallery .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    .tile { display: flex; flex-direction: column; }
+    .tile img { width: 100%; height: auto; aspect-ratio: 1600 / 2480; object-fit: cover; display: block; }
+    .character-hero { max-width: 540px; margin: 0 auto 32px; text-align: center; }
+    .character-hero a { display: inline-block; max-width: 100%; }
+    .character-hero img { width: 100%; max-width: 516px; aspect-ratio: 1536 / 1024; height: auto; display: block; border-radius: 4px; }
+    .art-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .art-grid img { width: 100%; aspect-ratio: 1983 / 793; object-fit: contain; display: block; }
+    @media(max-width:760px){
+      .cover-triad { grid-template-columns: 1fr; gap: 22px; }
+      .gallery .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .character-hero { max-width: 100%; }
+      .art-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+  </style>
 </head>
 <body><main class="gallery">
       <header class="gallery-header">

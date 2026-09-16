@@ -266,16 +266,28 @@ img{display:block}
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 22px;
-  align-items: start;
+  align-items: stretch;
 }
 .cover-triad > div {
   display: flex;
   flex-direction: column;
 }
+.cover-triad a {
+  display: block;
+  flex: 1;
+}
 .cover-triad img {
   width: 100%;
   height: auto;
   border-radius: 4px;
+  display: block;
+}
+.cover-triad > div:first-child img {
+  aspect-ratio: 941 / 1672;
+}
+.cover-triad > div:nth-child(2) img,
+.cover-triad > div:nth-child(3) img {
+  aspect-ratio: 1600 / 2840;
 }
 .cover-triad h2, .gallery h2 {
   font: 26px Travel;
@@ -284,9 +296,9 @@ img{display:block}
 }
 
 .gallery .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.tile{background:white;border-radius:4px;overflow:hidden;text-decoration:none;box-shadow:0 3px 10px rgba(47, 123, 154, 0.08)}
-.tile img{width:100%;height:auto}
-.tile b{display:block;padding:12px;font-size:14px}
+.tile{background:white;border-radius:4px;overflow:hidden;text-decoration:none;box-shadow:0 3px 10px rgba(47, 123, 154, 0.08);display:flex;flex-direction:column}
+.tile img{width:100%;height:auto;aspect-ratio:1600 / 2480;object-fit:cover;display:block}
+.tile b{display:block;padding:12px;font-size:14px;margin-top:auto}
 .gallery section{margin:36px 0 0}
 
 /* 角色设定英雄居中块 */
@@ -297,6 +309,7 @@ img{display:block}
 }
 .character-hero a {
   display: inline-block;
+  max-width: 100%;
   background: white;
   padding: 12px;
   border-radius: 8px;
@@ -304,8 +317,11 @@ img{display:block}
 }
 .character-hero img {
   width: 100%;
+  max-width: 516px;
+  aspect-ratio: 1536 / 1024;
   height: auto;
   border-radius: 4px;
+  display: block;
 }
 .character-hero p {
   font: 18px Travel;
@@ -316,7 +332,7 @@ img{display:block}
 /* 绘本风景画廊网格 (2x3) */
 .art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .art-item{background:white;padding:10px;border-radius:6px;box-shadow:0 3px 10px rgba(47, 123, 154, 0.08)}
-.art-grid img{width:100%;aspect-ratio:2.5;object-fit:contain;background:#fff;border-radius:4px}
+.art-grid img{width:100%;aspect-ratio:1983 / 793;object-fit:contain;background:#fff;border-radius:4px;display:block}
 .gallery small{line-height:1.9;color:#607e8a;display:block;margin-top:28px}
 
 .contact{width:1800px;padding:32px;background:#edf7fa}
@@ -339,3 +355,4 @@ img{display:block}
   .nav{gap:18px;font-size:13px}
   .gallery section{margin-top:28px}
 }
+
